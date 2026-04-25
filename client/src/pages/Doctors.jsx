@@ -109,11 +109,11 @@ const Doctors = () => {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[1,2,3].map(i => (
-              <div key={i} className="h-96 bg-white animate-pulse rounded-[2.5rem]"></div>
+              <div key={i} className="h-96 bg-white animate-pulse rounded-5xl"></div>
             ))}
           </div>
         ) : doctors.length === 0 ? (
-          <div className="text-center py-24 bg-white rounded-[3rem] shadow-sm border border-slate-100">
+          <div className="text-center py-24 bg-white rounded-6xl shadow-sm border border-slate-100">
             <div className="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
               <Search className="h-10 w-10 text-slate-300" />
             </div>
@@ -124,9 +124,9 @@ const Doctors = () => {
             {doctors.map((doctor) => (
               <div
                 key={doctor.id}
-                className="group bg-white rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:shadow-primary-100 transition-all duration-500 border border-slate-100 overflow-hidden"
+                className="group bg-white rounded-5xl shadow-sm hover:shadow-2xl hover:shadow-primary-100 transition-all duration-500 border border-slate-100 overflow-hidden"
               >
-                <div className="relative h-40 bg-gradient-to-br from-primary-500 to-blue-700">
+                <div className="relative h-40 bg-linear-to-br from-primary-500 to-blue-700">
                   <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                   <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
                     <div className="bg-white p-1.5 rounded-full shadow-xl">

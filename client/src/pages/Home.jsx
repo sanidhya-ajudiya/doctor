@@ -64,12 +64,12 @@ const Home = () => {
 
             <div className="mt-16 sm:mt-24 lg:mt-0 lg:col-span-5">
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-tr from-primary-400 to-blue-600 rounded-[2.5rem] blur-2xl opacity-20 -z-10 animate-pulse"></div>
-                <div className="bg-white p-2 rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100">
+                <div className="absolute -inset-4 bg-linear-to-tr from-primary-400 to-blue-600 rounded-5xl blur-2xl opacity-20 -z-10 animate-pulse"></div>
+                <div className="bg-white p-2 rounded-5xl shadow-2xl overflow-hidden border border-slate-100">
                   <img 
                     src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" 
                     alt="Doctor" 
-                    className="rounded-[2rem] w-full object-cover aspect-[4/5]"
+                    className="rounded-4xl w-full object-cover aspect-4/5"
                   />
                   <div className="absolute bottom-8 left-8 right-8 glass-morphism p-6 rounded-2xl border border-white/40">
                     <div className="flex items-center space-x-4">
@@ -122,7 +122,7 @@ const Home = () => {
                 color: "bg-emerald-50 text-emerald-600"
               }
             ].map((feature, idx) => (
-              <div key={idx} className="group p-10 rounded-[2rem] border border-slate-100 hover:border-primary-100 hover:bg-white hover:shadow-2xl hover:shadow-primary-100 transition-all duration-500">
+              <div key={idx} className="group p-10 rounded-4xl border border-slate-100 hover:border-primary-100 hover:bg-white hover:shadow-2xl hover:shadow-primary-100 transition-all duration-500">
                 <div className={`${feature.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500`}>
                   {feature.icon}
                 </div>
@@ -161,7 +161,7 @@ const Home = () => {
       {/* CTA Section */}
       <div className="py-24 bg-[#fcfcfd]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-primary-600 to-blue-700 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary-200">
+          <div className="bg-linear-to-br from-primary-600 to-blue-700 rounded-6xl p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary-200">
             <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 relative z-10">
               Transform Your Health Journey Today
