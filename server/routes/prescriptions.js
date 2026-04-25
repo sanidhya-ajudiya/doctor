@@ -84,4 +84,27 @@ router.get('/my', authenticateToken, authorizeRoles('user'), async (req, res) =>
   }
 });
 
+// Get all prescriptions (Admin only)
+router.get('/all', authenticateToken, authorizeRoles('admin'), async (req, res) => {
+  try {
+    const [prescriptions] = await pool.query(`
+      SELECT p.*, d.name as doctor_name, u.name as user_name 
+      FROM prescriptions p 
+      JOIN doctors d ON p.doctor_id = d.id 
+      JOIN users u ON p.user_id = u.id 
+      ORDER BY p.created_at DESC
+    `);
+
+    const formatted = prescriptions.map(p => ({
+      ...p,
+      medicines: typeof p.medicines === 'string' ? JSON.parse(p.medicines) : p.medicines
+    }));
+
+    res.json(formatted);
+  } catch (error) {
+    console.error('Get all prescriptions error:', error);
+    res.status(500).json({ error: 'Server error fetching prescriptions' });
+  }
+});
+
 export default router;

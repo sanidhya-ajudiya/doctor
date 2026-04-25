@@ -14,6 +14,7 @@ const AdminDashboard = () => {
   const [doctors, setDoctors] = useState([]);
   const [users, setUsers] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [prescriptions, setPrescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
   const [showAddDoctorModal, setShowAddDoctorModal] = useState(false);
@@ -38,17 +39,19 @@ const AdminDashboard = () => {
 
   const fetchAdminData = async () => {
     try {
-      const [analyticsRes, doctorsRes, usersRes, appointmentsRes] = await Promise.all([
+      const [analyticsRes, doctorsRes, usersRes, appointmentsRes, prescriptionsRes] = await Promise.all([
         api.get('/users/analytics'),
         api.get('/doctors'),
         api.get('/users/all'),
         api.get('/appointments/all'),
+        api.get('/prescriptions/all'),
       ]);
 
       setAnalytics(analyticsRes.data);
       setDoctors(doctorsRes.data);
       setUsers(usersRes.data);
       setAppointments(appointmentsRes.data);
+      setPrescriptions(prescriptionsRes.data);
     } catch (error) {
       console.error('Error fetching admin data:', error);
     } finally {
@@ -179,6 +182,16 @@ const AdminDashboard = () => {
                 }`}
               >
                 Appointments
+              </button>
+              <button
+                onClick={() => setActiveTab('prescriptions')}
+                className={`py-4 px-1 border-b-2 font-medium transition ${
+                  activeTab === 'prescriptions'
+                    ? 'border-primary-600 text-primary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Prescriptions
               </button>
             </div>
           </div>
@@ -355,6 +368,56 @@ const AdminDashboard = () => {
                       </td>
                     </tr>
                   ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Prescriptions Tab */}
+        {activeTab === 'prescriptions' && (
+          <div className="bg-white rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">All Prescriptions</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Patient</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Doctor</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Medicines</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Notes</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {prescriptions.map((prescription) => (
+                    <tr key={prescription.id} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-3 px-4">{prescription.user_name}</td>
+                      <td className="py-3 px-4">{prescription.doctor_name}</td>
+                      <td className="py-3 px-4">
+                        <div className="flex flex-wrap gap-1">
+                          {prescription.medicines.map((med, idx) => (
+                            <span key={idx} className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded border border-blue-100">
+                              {med.name} ({med.dosage})
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="py-3 px-4 max-w-xs truncate" title={prescription.notes}>
+                        {prescription.notes || '-'}
+                      </td>
+                      <td className="py-3 px-4">
+                        {new Date(prescription.created_at).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                  {prescriptions.length === 0 && (
+                    <tr>
+                      <td colSpan="5" className="text-center py-8 text-gray-500">
+                        No prescriptions found.
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
