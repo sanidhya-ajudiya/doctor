@@ -1,6 +1,6 @@
 # Doctor Appointment System
 
-A full-stack Doctor Appointment System built with React JS (frontend), Express JS + Node JS (backend), and MySQL (database)
+A full-stack Doctor Appointment System built with React JS (frontend), Express JS + Node JS (backend), and MySQL (database).
 
 ## Features
 
